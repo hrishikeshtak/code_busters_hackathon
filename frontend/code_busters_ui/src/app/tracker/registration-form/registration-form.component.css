@@ -1,0 +1,4 @@
+.invalid-input, .require{
+    color: red;
+    font-weight: 500;
+}

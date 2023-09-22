@@ -1,21 +1,42 @@
 <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="card">
-            <h2 id="heading">Register:</h2>
+            <h3 id="heading">Register:</h3>
 
-            <form id="msform" class="needs-validation" [formGroup]="registrationForm" (ngSubmit)="onSubmit()"
-                >
-                <label class="form-label" for="firstName"><span class="required">*</span></label>
-                <input class="form-control" type="string" name="firstName" id="firstName" formControlName="firstName"
-                    placeholder="First Name + Middle Name" />
-                <div class="invalid-entry">Please enter the first name</div>
+            <form class="needs-validation" name="registrationForm" [formGroup]="registrationForm" (ngSubmit)="onSubmit()" novalidate>
 
-                <label class="form-label" for="lastName"><span class="required">*</span></label>
-                <input class="form-control" type="string" name="lastName" id="lastName" formControlName="lastName"
-                    placeholder="Last Name" />
-                <div class="invalid-entry">Please enter the last name</div>
-
-                <button type="submit" class="submit">Submit</button>
+                <div>
+                    <label for="firstName" class="form-label">First Name: <span class="required">*</span></label>
+                    <input id="firstName" class="form-control" type="text" 
+                        placeholder="First Name" value="" required>
+                    <div class="inavlid">Please enter first name</div>
+                </div>
+                <div class="form-group">
+                    <label for="lastName" class="form-label">Last Name: <span class="required">*</span></label>
+                    <input id="lastName" class="form-control" type="text" formControlName="lastName">
+                    <div class="inavlid-feedback">Please enter last name</div>
+                </div>
+                <div class="form-group">
+                    <label for="dob" class="form-label">DOB: <span class="required">*</span></label>
+                    <input id="dob" class="form-control" type="date" formControlName="lastName">
+                    <!-- <div class="inavlid-feedback">Please enter valid date of birth</div> -->
+                </div>
+                <div class="form-group">
+                    <label for="contactNumber" class="form-label">Contact Number: <span
+                            class="required">*</span></label>
+                    <input id="contactNumber" class="form-control" type="text" formControlName="lastName">
+                    <!-- <div class="inavlid-feedback">Please enter valid contact number</div> -->
+                </div>
+                <div class="form-group">
+                    <label for="location" class="form-label">Location: <span class="required">*</span></label>
+                    <input id="location" class="form-control" type="text" formControlName="lastName">
+                    <!-- <div class="inavlid-feedback">Please enter rough location of residence</div> -->
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" >Next</button>
+                </div>
+                <p class="invalid-input text-center" *ngIf="!registrationForm.valid">Please fill all the required
+                    paramters and/or verify the input values</p>
             </form>
         </div>
     </div>

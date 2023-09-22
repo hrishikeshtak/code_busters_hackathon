@@ -12,11 +12,10 @@
                         </div>
                         <div class="form-group">
                             <label for="secret" class="text-info">Password: </label> 
-                            <input id="secret" class="form-control" type="password" formControlName="secret"> 
+                            <input id="secret" class="form-control" type="password" formControlName="secret">  <br/>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-info btn-md" value="submit" [disabled]="!loginForm.valid">Submit</button>
-                            <!--input type="submit" name="submit" class="btn btn-info btn-md" [disabled]="!loginForm.valid" value="submit" -->
+                            <input type="submit" name="submit" [disabled]="!loginForm.valid" class="btn btn-info btn-md" value="submit">
                         </div>
                     </form>
                 </div>

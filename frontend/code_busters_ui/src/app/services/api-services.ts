@@ -53,4 +53,15 @@ export class ApiService {
             responseType : 'json'
         });
     }
+
+    public listCategories (): Observable<any> {
+        console.log('listCategories Request');
+        return this.httpClient.get(this.baseURl+'/category', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            },
+            responseType : 'json'
+        });
+    }
 }

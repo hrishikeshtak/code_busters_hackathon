@@ -13,6 +13,10 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
+    path:'home',
+    component: AppComponent
+  },
+  {
     path:'dashboard',
     component: DashboardComponent
   },

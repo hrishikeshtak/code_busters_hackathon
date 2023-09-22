@@ -43,17 +43,17 @@ export class LoginComponent implements OnInit{
     this.apiService.navigatorLogin(lData).subscribe((data: any) => {
       console.log('Response'+data.id+data.first_name+data.last_name+data.role);
 
-      // this.navigatorDetails= {
-      //   firstname: data.first_name,
-      //   lastname: data.last_name,
-      //   navigatorId: data.id,
-      //   role: data.role
-      // };
+      this.navigatorDetails= {
+        firstname: data.first_name,
+        lastname: data.last_name,
+        navigatorId: data.id,
+        role: data.role
+      };
       // console.log('Login --' + this.navigatorDetails);
-      // this.navDetails.navigatorDetails = this.navigatorDetails
+      this.navDetails.navigatorDetails = this.navigatorDetails
       // console.log('Login Details -- ' + this.navDetails.navigatorDetails);
      // this.navDetails.isLoggedIn = true;
-      this._router.navigateByUrl('dashboard');
+      this._router.navigateByUrl('home');
     },(error) => {
       console.log('Error'+error);
     })

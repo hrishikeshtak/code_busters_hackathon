@@ -23,8 +23,10 @@ export class AppComponent {
     ngOnInit(): void {
       console.log('AppComponent--' +this.navDetails.navigatorDetails)
       
-      this.navigatorDetails = this.nDetails;
-      this.isLoggedIn = ( this.nDetails.navigatorDetails.firstname != null);
+      this.navigatorDetails = this.nDetails.navigatorDetails;
+      let name:string =this.nDetails.navigatorDetails.firstname;
+      console.log(name.length)
+      this.isLoggedIn = ( name != null && name.length>0);
       console.log('AppComponent' + this.navigatorDetails);
     }
 }

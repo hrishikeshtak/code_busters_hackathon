@@ -57,15 +57,15 @@ def get_stats():
 
     data = []
     for key, value in category_stats.items():
-        data.append({"key": key, "value": value})
+        data.append({"key": key, "y": value})
     final_response.append({"category_stats": data})
     data = []
     for key, value in organization_stats.items():
-        data.append({"key": key, "value": value})
+        data.append({"key": key, "y": value})
     final_response.append({"organization_stats": data})
     data = []
     for key, value in status_stats.items():
-        data.append({"key": key, "value": value})
+        data.append({"key": key, "y": value})
     final_response.append({"status_stats": data})
 
     navigator_entries = dynamodb.get_all_items_from_table(NAVIGATOR_TABLE_NAME)
@@ -80,7 +80,7 @@ def get_stats():
 
     data = []
     for key, value in status_stats.items():
-        data.append({"key": key, "value": value})
+        data.append({"key": key, "y": value})
     final_response.append({"navigator_stats": data})
     return JSONResponse(
         content=final_response,

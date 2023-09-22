@@ -2,12 +2,6 @@ import logging
 import os
 from typing import Union
 
-AWS_REGION = os.environ.get("AWS_REGION", "us-east-1")
-NAVIGATOR_TABLE_NAME = "navigator"
-HELPSEEKER_TABLE_NAME = "helpseeker"
-SUCCESS_STATUS_CODE = 200
-INTERNAL_SERVER_STATUS_CODE = 500
-
 
 class Helper:
     _level: Union[str, int] = os.environ.get("LOG_LEVEL", "INFO")

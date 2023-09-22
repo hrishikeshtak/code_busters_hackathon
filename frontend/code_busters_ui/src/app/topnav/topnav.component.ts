@@ -1,16 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from './services/user-services';
+import { UserService } from '../services/user-services';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-topnav',
+  templateUrl: './topnav.component.html',
+  styleUrls: ['./topnav.component.css']
 })
-export class AppComponent {
-  title = 'code_busters_ui';
+export class TopnavComponent implements OnInit{
   navigatorDetails : any;
-  isLoggedIn :Boolean = false;
   constructor(private _router : Router, private navDetails: UserService) { }
     navigateTo(path: String){
       console.log([path])
@@ -18,7 +16,6 @@ export class AppComponent {
     }
     ngOnInit(): void {
       console.log('TopNav--' +this.navDetails.isLoggedIn)
-      this.isLoggedIn = this.navDetails.isLoggedIn;
       this.navigatorDetails = this.navDetails.navigatorDetails;
       console.log('topNav' + this.navigatorDetails);
     }

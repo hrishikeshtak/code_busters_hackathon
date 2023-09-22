@@ -1,12 +1,13 @@
+from copy import deepcopy
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import JSONResponse
 
 from ...common.constants import (HELPSEEKER_TABLE_NAME,
                                  INTERNAL_SERVER_STATUS_CODE, NOT_FOUND,
-                                 SUCCESS_STATUS_CODE)
+                                 SUCCESS_STATUS_CODE, CATEGORY_TABLE_NAME, ORGANIZATION_TABLE_NAME, WORKFLOW_TABLE_NAME)
 from ...common.dynamodb_connector import DynamoDBConnector
 from ...common.helper import Helper
-from ...rest.schemas.schema import AuthDetails, HelpSeeker, UserData, HelpSeekerResponse
+from ...rest.schemas.schema import AuthDetails, HelpSeeker, UserData, HelpSeekerResponse, Category, Organization
 from typing import List
 
 router = APIRouter(
@@ -79,15 +80,50 @@ def register_help_seeker(user_data: UserData):
 @router.get("/get_all_helpseekers_from_navigator_id/{navigator_id}")
 def get_all_navigators_from_helpseeker_id(navigator_id: int):
     dynamodb = DynamoDBConnector()
+    # fetch all category from dynamodb table
+    response = dynamodb.get_all_items_from_table(CATEGORY_TABLE_NAME)
+    categories_data = {}
+    if response:
+        for entry in response:
+            data = Category(**entry).model_dump()
+            categories_data[data["id"]] = data
+
+    # fetch all organization details from dynamodb table
+    response = dynamodb.get_all_items_from_table(ORGANIZATION_TABLE_NAME)
+    organizations_data = {}
+    if response:
+        for entry in response:
+            data = Organization(**entry).model_dump()
+            organizations_data[data["id"]] = data
+
+    # get data from helpseeker table
+    final_response = []
     entries = dynamodb.get_all_items_from_table(HELPSEEKER_TABLE_NAME)
-    response = []
     for entry in entries:
         if navigator_id == int(entry.get("navigator_id")):
-            response.append(HelpSeekerResponse(**entry).model_dump())
+            final_response.append(HelpSeekerResponse(**entry).model_dump())
+
+    # get data from workflow table
+    entries = dynamodb.get_all_items_from_table(WORKFLOW_TABLE_NAME)
+    final_output = []
+    for helpseeker_entry in final_response:
+        for entry in entries:
+            if int(helpseeker_entry["id"]) == int(entry["helpseeker_id"]):
+                data = deepcopy(helpseeker_entry)
+                category_id = int(entry.get("category_id"))
+                organization_id = int(entry.get("organization_id"))
+                data["category_id"] = category_id
+                data["notes"] = entry.get("notes")
+                data["organization_id"] = organization_id
+                data["status"] = entry.get("status")
+                data["status_enrolled_date"] = entry.get("status_enrolled_date")
+                data["category"] = categories_data[category_id]
+                data["organization"] = organizations_data[organization_id]
+                final_output.append(data)
 
     Helper.print_message(f"successfully fetched helpseekrs entries based on the navigator_id: {navigator_id}")
     return JSONResponse(
-        content=response,
+        content=final_output,
         status_code=SUCCESS_STATUS_CODE,
         media_type="application/json",
     )

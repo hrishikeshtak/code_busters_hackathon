@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit{
       // console.log('Login --' + this.navigatorDetails);
       // this.navDetails.navigatorDetails = this.navigatorDetails
       // console.log('Login Details -- ' + this.navDetails.navigatorDetails);
-      this.navDetails.isLoggedIn = true;
+     // this.navDetails.isLoggedIn = true;
       this._router.navigateByUrl('dashboard');
     },(error) => {
       console.log('Error'+error);

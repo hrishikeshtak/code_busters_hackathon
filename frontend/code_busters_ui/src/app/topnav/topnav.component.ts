@@ -15,7 +15,7 @@ export class TopnavComponent implements OnInit{
       this._router.navigate([path])
     }
     ngOnInit(): void {
-      console.log('TopNav--' +this.navDetails.isLoggedIn)
+      //console.log('TopNav--' +this.navDetails.isLoggedIn)
       this.navigatorDetails = this.navDetails.navigatorDetails;
       console.log('topNav' + this.navigatorDetails);
     }

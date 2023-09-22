@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api-services'
-import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import { CanvasJS, CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 
 @Component({
   selector: 'app-reporting',
@@ -9,15 +9,22 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 })
 export class ReportingComponent implements OnInit{
 	categoryChartOptions : any;
+	cStats =[]
 	organizationChartOptions : any;
 	statusChartOptions :any;
 	navigatorChartOptions :any;
+	chartOptions : any;
 	constructor(private apiService : ApiService){
-
+		this.categoryChartOptions={};	  
 	}
+	
+	
 	ngOnInit(): void {
 		this.apiService.stats().subscribe((data: any) => {
-			console.log("data" + data[0].category_stats);
+			console.log("data" + data[0].category_stats[0].y);
+			this.cStats = data[0].category_stats;
+			console.log("---"+this.cStats)
+			
 			this.categoryChartOptions = {
 				animationEnabled: true,
 				title: {
@@ -28,9 +35,11 @@ export class ReportingComponent implements OnInit{
 				  startAngle: -90,
 				  indexLabel: "{key}: {y}",
 				  yValueFormatString: "#,###.##'%'",
-				  dataPoints: data[0].category_stats
+				  dataPoints: this.cStats
 				}]
 			  }	
+			  
+			  let oStats = data[0].organization_stats;
 			  this.organizationChartOptions = {
 				animationEnabled: true,
 				title: {
@@ -38,12 +47,13 @@ export class ReportingComponent implements OnInit{
 				},
 				data: [{
 				  type: "pie",
-				  startAngle: -90,
+				  startAngle: -80,
 				  indexLabel: "{key}: {y}",
 				  yValueFormatString: "#,###.##'%'",
-				  dataPoints: data[0].organization_stats
+				  dataPoints: oStats
 				}]
 			  }	
+			  let sStats = data[0].status_stats;
 			  this.statusChartOptions = {
 				animationEnabled: true,
 				title: {
@@ -54,9 +64,10 @@ export class ReportingComponent implements OnInit{
 				  startAngle: -90,
 				  indexLabel: "{key}: {y}",
 				  yValueFormatString: "#,###.##'%'",
-				  dataPoints: data[0].status_stats
+				  dataPoints: sStats
 				}]
 			  }	
+			  let nStats = data[0].status_stats;
 			  this.navigatorChartOptions = {
 				animationEnabled: true,
 				title: {
@@ -67,7 +78,7 @@ export class ReportingComponent implements OnInit{
 				  startAngle: -90,
 				  indexLabel: "{key}: {y}",
 				  yValueFormatString: "#,###.##'%'",
-				  dataPoints: data[0].navigator_stats
+				  dataPoints: nStats
 				}]
 			  }	
 		},(error) => {

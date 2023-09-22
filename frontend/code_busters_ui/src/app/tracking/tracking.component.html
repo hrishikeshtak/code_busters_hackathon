@@ -1,0 +1,23 @@
+<table class="table">
+  <tr>
+    <th scope="col"> First Name </th>
+    <th scope="col"> Last Name </th>
+    <th scope="col"> Date of Birth </th>
+    <th scope="col"> Enrolled Date</th>
+    <th scope="col"> Location</th>
+    <th scope="col"> Contact Number</th>
+  </tr>
+<tbody>
+  <div *ngFor="let item of navigators" class="form-group">
+    <tr>
+      <th scope="row">{{item.first_name}}</th>
+      <th scope="row">{{item.last_name}}</th>
+      <th scope="row">{{item.date_of_birth}}</th>
+      <th scope="row">{{item.enrolled_date}}</th>
+      <th scope="row">{{item.location}}</th>
+      <th scope="row">{{item.contact_number}}</th>
+    </tr>
+  </div>
+</tbody>
+</table>
+

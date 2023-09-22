@@ -97,3 +97,15 @@ class Organization(BaseModel):
     category_name: str
     name: str
     service: str
+
+
+class HelpSeekerResponse(BaseModel):
+    """HelpSeeker Schema"""
+    id: int
+    first_name: str
+    last_name: str
+    date_of_birth: str
+    enrolled_date: str = datetime.today().strftime("%Y-%m-%d")
+    location: str
+    navigator_id: int
+    contact_number: str

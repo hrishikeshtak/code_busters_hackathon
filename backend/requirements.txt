@@ -6,3 +6,5 @@ fastapi[all]==0.103.1
 isort==5.12.0
 pylint==2.17.5
 phonenumbers==8.13.21
+python-slugify==8.0.1
+python-magic==0.4.27

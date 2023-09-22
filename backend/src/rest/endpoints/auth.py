@@ -6,7 +6,8 @@ from ...common.constants import (HELPSEEKER_TABLE_NAME,
                                  SUCCESS_STATUS_CODE)
 from ...common.dynamodb_connector import DynamoDBConnector
 from ...common.helper import Helper
-from ...rest.schemas.schema import AuthDetails, HelpSeeker, UserData
+from ...rest.schemas.schema import AuthDetails, HelpSeeker, UserData, HelpSeekerResponse
+from typing import List
 
 router = APIRouter(
     responses={NOT_FOUND: {"description": "Not found"}},
@@ -75,6 +76,18 @@ def register_help_seeker(user_data: UserData):
     )
 
 
+@router.get("/get_all_helpseekers_from_navigator_id/{navigator_id}")
+def get_all_navigators_from_helpseeker_id(navigator_id: int):
+    dynamodb = DynamoDBConnector()
+    entries = dynamodb.get_all_items_from_table(HELPSEEKER_TABLE_NAME)
+    response = []
+    for entry in entries:
+        if navigator_id == int(entry.get("navigator_id")):
+            response.append(HelpSeekerResponse(**entry).model_dump())
 
-
-
+    Helper.print_message(f"successfully fetched helpseekrs entries based on the navigator_id: {navigator_id}")
+    return JSONResponse(
+        content=response,
+        status_code=SUCCESS_STATUS_CODE,
+        media_type="application/json",
+    )

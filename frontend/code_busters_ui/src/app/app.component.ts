@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from './services/user-services';
+import { TopnavComponent } from './topnav/topnav.component';
+import { BottomnavComponent } from './bottomnav/bottomnav.component';
+import { LoginComponent } from './login/login.component';
 
 @Component({
   selector: 'app-root',

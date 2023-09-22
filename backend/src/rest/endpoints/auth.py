@@ -77,7 +77,7 @@ def register_help_seeker(user_data: UserData):
     )
 
 
-@router.get("/get_all_helpseekers_from_navigator_id/{navigator_id}")
+@router.get("/list_helpseekers/{navigator_id}")
 def get_all_navigators_from_helpseeker_id(navigator_id: int):
     dynamodb = DynamoDBConnector()
     # fetch all category from dynamodb table

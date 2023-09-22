@@ -4,8 +4,8 @@ import { Injectable, Injector } from "@angular/core";
 })
 export class UserService {
     constructor(){}
-    isLoggedIn: Boolean= false;
-    public navigatorDetails!:{
+    // isLoggedIn: Boolean= false;
+    public navigatorDetails: any ={
         "firstname":"",
         "lastname":"",
         "navigatorId":"",

@@ -1,0 +1,22 @@
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="card">
+            <h2 id="heading">Register:</h2>
+
+            <form id="msform" class="needs-validation" [formGroup]="registrationForm" (ngSubmit)="onSubmit()"
+                >
+                <label class="form-label" for="firstName"><span class="required">*</span></label>
+                <input class="form-control" type="string" name="firstName" id="firstName" formControlName="firstName"
+                    placeholder="First Name + Middle Name" />
+                <div class="invalid-entry">Please enter the first name</div>
+
+                <label class="form-label" for="lastName"><span class="required">*</span></label>
+                <input class="form-control" type="string" name="lastName" id="lastName" formControlName="lastName"
+                    placeholder="Last Name" />
+                <div class="invalid-entry">Please enter the last name</div>
+
+                <button type="submit" class="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

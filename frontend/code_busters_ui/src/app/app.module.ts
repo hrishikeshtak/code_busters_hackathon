@@ -4,10 +4,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TrackerComponent } from './tracker/tracker.component';
+import { RegistrationFormComponent } from './tracker/registration-form/registration-form.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TrackerComponent,
+    RegistrationFormComponent
   ],
   imports: [
     BrowserModule,

@@ -8,7 +8,10 @@ from ...common.constants import (
     NOT_FOUND,
     SUCCESS_STATUS_CODE,
     WORKFLOW_TABLE_NAME,
-    HELPSEEKER_TABLE_NAME, CATEGORY_TABLE_NAME, ORGANIZATION_TABLE_NAME, NAVIGATOR_TABLE_NAME,
+    HELPSEEKER_TABLE_NAME,
+    CATEGORY_TABLE_NAME,
+    ORGANIZATION_TABLE_NAME,
+    NAVIGATOR_TABLE_NAME,
 )
 from ...common.dynamodb_connector import DynamoDBConnector
 from ...rest.schemas.schema import Category, Organization
@@ -51,9 +54,19 @@ def get_stats():
         category_stats[categories_data[data["category_id"]]["name"]] += 1
         organization_stats[organizations_data[data["organization_id"]]["name"]] += 1
         status_stats[data["status"]] += 1
-    final_response.append({"category_stats": category_stats})
-    final_response.append({"organization_stats": organization_stats})
-    final_response.append({"status_stats": status_stats})
+
+    data = []
+    for key, value in category_stats.items():
+        data.append({"key": key, "value": value})
+    final_response.append({"category_stats": data})
+    data = []
+    for key, value in organization_stats.items():
+        data.append({"key": key, "value": value})
+    final_response.append({"organization_stats": data})
+    data = []
+    for key, value in status_stats.items():
+        data.append({"key": key, "value": value})
+    final_response.append({"status_stats": data})
 
     navigator_entries = dynamodb.get_all_items_from_table(NAVIGATOR_TABLE_NAME)
     navigator_details = {}
@@ -64,7 +77,11 @@ def get_stats():
     for entry in entries:
         data = HelpSeekerResponse(**entry).model_dump()
         navigator_stats[navigator_details[data["navigator_id"]]["username"]] += 1
-    final_response.append({"navigator_stats": navigator_stats})
+
+    data = []
+    for key, value in status_stats.items():
+        data.append({"key": key, "value": value})
+    final_response.append({"navigator_stats": data})
     return JSONResponse(
         content=final_response,
         status_code=SUCCESS_STATUS_CODE,

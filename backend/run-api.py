@@ -13,16 +13,15 @@ def start_api_service():
         access_log=False,
         workers=1,
         timeout_keep_alive=60,
-        reload=True
+        reload=True,
     )
 
 
-if __name__ == '__main__':
-
+if __name__ == "__main__":
     try:
         start_api_service()
     except Exception:
         Helper.print_message(
             "Exception in main method: {}".format(traceback.format_exc()),
-            level='error',
+            level="error",
         )

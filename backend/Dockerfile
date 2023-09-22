@@ -30,4 +30,3 @@ RUN pip install --upgrade pip \
 EXPOSE 8080
 
 ENTRYPOINT ["./entrypoint.sh"]
-# CMD ["/bin/bash"]

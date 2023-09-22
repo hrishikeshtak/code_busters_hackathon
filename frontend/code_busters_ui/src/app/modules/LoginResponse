@@ -1,0 +1,9 @@
+export class LoginResponse {
+    fname : String;
+    lname : String;
+
+    constructor(userName : String, password:String){
+        this.fname = userName;
+        this.lname = password;
+    }
+}

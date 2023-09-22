@@ -1,4 +1,15 @@
+.heading{
+    margin-bottom: 15px;
+}
 .invalid-input, .require{
     color: red;
     font-weight: 500;
+}
+
+.form-label{
+    font-weight: 500;
+}
+.form-control {
+    margin-top: -2px;
+    margin-bottom: 10px;
 }

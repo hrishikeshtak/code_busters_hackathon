@@ -2,6 +2,7 @@
 from datetime import datetime
 from enum import Enum
 from typing import List, Optional
+from decimal import Decimal
 
 import phonenumbers
 from pydantic import BaseModel, field_validator
@@ -109,3 +110,13 @@ class HelpSeekerResponse(BaseModel):
     location: str
     navigator_id: int
     contact_number: str
+
+
+class WorkflowResponse(BaseModel):
+    id: int
+    category_id: int
+    helpseeker_id: int
+    notes: str
+    organization_id: int
+    status: str
+    status_enrolled_date: str

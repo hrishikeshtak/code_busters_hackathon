@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api-services';
 
 @Component({
@@ -6,8 +6,16 @@ import { ApiService } from '../services/api-services';
   templateUrl: './tracking.component.html',
   styleUrls: ['./tracking.component.css']
 })
-export class TrackingComponent {
+export class TrackingComponent implements OnInit{
+  navigators : any;
   constructor(private apiService : ApiService){
 
 	}
+  ngOnInit(): void {
+    this.apiService.listHelpseeker(1).subscribe((data: any) => {
+      this.navigators = data;
+    },(error) => {
+      console.log('Error'+error);
+    });
+  }
 }
